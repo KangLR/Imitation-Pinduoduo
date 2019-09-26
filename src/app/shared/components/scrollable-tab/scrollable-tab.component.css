@@ -1,0 +1,47 @@
+ul {
+    padding: 0;
+    margin:0;
+    display: flex;
+    flex-direction: row;
+}
+
+/*
+li内部要垂直布局，把display改成flex
+*/
+ul li{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin:0 5px;
+    padding:0;
+    white-space: nowrap;/*避免字换行*/
+}
+a {
+    text-decoration: none;
+}
+/*关掉系统自带的滚动条*/
+::-webkit-scrollbar{
+    display: none;
+}
+.active{
+    color: aquamarine;
+    font-weight: 900;
+}
+
+.first{
+    color:greenyellow;
+}
+
+.indicator{
+    background-color: bisque;
+    height: 2px;
+    width: 2rem;
+    margin-top: 2px;
+}
+.indicator1{
+    background-color: bisque;
+    height: 2px;
+    width: 2rem;
+    margin-top: 2px;
+}

@@ -1,0 +1,25 @@
+<!--
+  [class.active]="i===selectedIndex" [class.first]='first'
+  换成ngClass
+-->
+
+<ul [ngStyle]="{'background-color': backgroundColor}">
+  <li *ngFor="let item of menus;let i=index;let odd=odd;let even=even;let first=first">
+    <a href='#'  
+    [ngClass]="{'active': i===selectedIndex,'first':first}"
+    [ngStyle]="{'color': i===selectedIndex?titleActiveColor:titleColor}"
+    (click)="handleSelection(i)"
+    >
+    {{item.title}}
+    </a>
+    <span 
+    class="indicator"  
+    [ngStyle]="{'backgroundColor':indicatorColor }"
+    *ngIf="i===selectedIndex  else template"></span>
+  </li>
+</ul>
+
+
+<ng-template #template>
+  <span class="indicator1"></span>
+</ng-template>
