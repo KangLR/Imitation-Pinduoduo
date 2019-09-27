@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input,EventEmitter, Output, SimpleChanges, OnChanges } from '@angular/core';
 
 //属性接口
 //ts中接口的作用就是进行类型检查
@@ -26,14 +26,47 @@ export interface TopMenu{
   templateUrl: './scrollable-tab.component.html',
   styleUrls: ['./scrollable-tab.component.css']
 })
-export class ScrollableTabComponent implements OnInit {
+export class ScrollableTabComponent implements OnInit,OnChanges {
 
-  constructor() { }
+  constructor() {
+    console.log('ScrollableTab组件构造调用')
+   }
 
+   //ngDoCheck和ngOnChanges不应该在同一个组件当中
+   //OnChange只监听自己组件本身的变化，在组件的@Input属性发生变化时调用，是索引对象，key:属性名 value:SimpleChanges对象
+   //DoCheck是对整个大的框架到达该组件做的检测
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ScrollableTab组件输入属性改变，可以由多次',changes)//都是字典对象
+  }
   ngOnInit() {
+    console.log('ScrollableTab组件初始化')
+  }
+  ngAfterContentInit(): void {
+    console.log('ScrollableTab组件内容初始化')
   }
 
+  //脏值检测两次
+  ngAfterContentChecked(): void {
+    console.log('ScrollableTab组件内容脏值检测')
+  }
+
+  //视图：组件+它的子组件都初始化完成
+  //该组件包含它自己和content
+  ngAfterViewInit(): void {
+    console.log('ScrollableTab组件视图初始化完成')  
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('ScrollableTab组件视图脏值检测')   
+  }
   
+  //组件销毁，可以在父组件实现
+  //比如当背景色不是black的时候销毁
+  //一般是做些清理工作，比如设置了setTimeInterval等，避免内存泄漏
+  //一般发生在父组件*ngIf或路由变化时销毁组件
+  ngOnDestroy(): void {
+    console.log('ScrollableTab组件销毁')        
+  }
 
   //让menus由外部定义,把数据都移到外部去
   @Input() menus:TopMenu[]=[];

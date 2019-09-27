@@ -4,11 +4,15 @@
   $event作为这个事件携带的数据,$event是个对象，他的属性取决于DOM事件的类型
 -->
 <app-scrollable-tab 
-  [backgroundColor]=" 'black' "
+  [backgroundColor]="scrollableTabBgColor"
   [menus]="topMenus" 
   [titleColor]=" '#fff' "
   [titleActiveColor]=" 'yellow' "
   [indicatorColor]=" 'yellow'"
   (tabSelected)="handleTabSelected($event)" 
+  *ngIf="scrollableTabBgColor==='black'"
 >
+<div>
+ng-content支持组件嵌套内容
+</div>
 </app-scrollable-tab>
