@@ -1,3 +1,11 @@
-<p>
-  image-slider works!
-</p>
+<div class="container" [ngStyle]="{'height': sliderHeight}">
+  <div class="image-slider" (scroll)="handleScroll($event)"  #imageSlider>
+    <img #img *ngFor="let slider of sliders" [src]="slider.imgUrl" [alt]="slider.caption">
+  </div>
+  <div class="nav-section">
+    <span class="slide-button" *ngFor="let _ of sliders;let idx=index"
+    [ngClass]="{'slide-button-select': idx===selectedIndex}"
+    >
+    </span>
+  </div>
+</div>

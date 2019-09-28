@@ -2,6 +2,8 @@
   []是属性绑定符，把menus绑定到topMenus
 
   $event作为这个事件携带的数据,$event是个对象，他的属性取决于DOM事件的类型
+
+  *ngIf="scrollableTabBgColor==='black'" 触发ngOnDestroy
 -->
 <app-scrollable-tab 
   [backgroundColor]="scrollableTabBgColor"
@@ -10,9 +12,6 @@
   [titleActiveColor]=" 'yellow' "
   [indicatorColor]=" 'yellow'"
   (tabSelected)="handleTabSelected($event)" 
-  *ngIf="scrollableTabBgColor==='black'"
->
-<div>
-ng-content支持组件嵌套内容
-</div>
-</app-scrollable-tab>
+  
+></app-scrollable-tab>
+<app-image-slider [sliders]="imageSliders"></app-image-slider>

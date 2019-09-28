@@ -1,0 +1,41 @@
+.container{
+    position: relative;
+    overflow: hidden;
+}
+.container .image-slider{
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;/*图片平滑过渡*/
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;/*强制在横轴产生吸附效果*/
+}
+
+.container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /*图片比较大，可能显示不全*/
+    scroll-snap-align: start;
+}
+
+.nav-section{
+    position: absolute;/*要让灰黑色条覆盖在图片上，就必须绝对位置*/
+    bottom: 0;
+    width: 100%;
+    opacity: 0.5;
+    color: aliceblue;
+    background-color: black;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+.nav-section .slide-button{
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    margin:5px;
+}
+.nav-section .slide-button-select{
+    background-color:red;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { TopMenu } from './shared/components';
+import { TopMenu, ImageSlider } from './shared/components';
 
 @Component({
   selector: 'app-root',
@@ -88,6 +88,41 @@ export class AppComponent implements OnInit{
       link: ''
     }
   ];
+
+  //轮播图图片
+  imageSliders:ImageSlider[]=[
+    {
+      imgUrl:
+      'http://pic2.sc.chinaz.com/files/pic/pic9/201908/zzpic19770.jpg',
+      link: '',
+      caption: ''
+    },
+    {
+      imgUrl:
+        'http://pic1.sc.chinaz.com/files/pic/pic9/201909/bpic13700.jpg',
+      link: '',
+      caption: ''
+    },
+    {
+      imgUrl:
+      'http://pic1.sc.chinaz.com/files/pic/pic9/201909/zzpic20261.jpg',
+      link: '',
+      caption: ''
+    },
+    {
+      imgUrl:
+        'http://pic1.sc.chinaz.com/files/pic/pic9/201909/bpic13648.jpg',
+      link: '',
+      caption: ''
+    },
+    {
+      imgUrl:
+        'http://pic.sc.chinaz.com/files/pic/pic9/201909/bpic13571.jpg',
+      link: '',
+      caption: ''
+    }
+  ];
+
 
   //点击然后整个背景变色
   scrollableTabBgColor='black';
