@@ -1,0 +1,6 @@
+/*应用的就是组件本身,定义在app.component.html里的<>，就是这个组件*/
+
+:host{
+    display: flex;
+    overflow-x: auto;
+}

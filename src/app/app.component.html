@@ -15,4 +15,9 @@
   
 ></app-scrollable-tab>
 <app-image-slider [sliders]="imageSliders"></app-image-slider>
-<app-horizontal-grid></app-horizontal-grid>
+<app-horizontal-grid>
+    <span appGridItem *ngFor="let item of channels">
+        <img [src]="item.icon" alt="" [appGridItemImage]=" '3rem'" [fitMode]=" 'cover' ">
+        <span appGridItemTitle='0.7rem'>{{item.title}}</span>
+    </span>
+</app-horizontal-grid>
