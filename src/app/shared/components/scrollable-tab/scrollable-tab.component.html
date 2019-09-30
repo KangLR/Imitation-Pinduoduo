@@ -5,7 +5,7 @@
 
 <ul [ngStyle]="{'background-color': backgroundColor}">
   <li *ngFor="let item of menus;let i=index;let odd=odd;let even=even;let first=first">
-    <a href='#'  
+    <a   
     [ngClass]="{'active': i===selectedIndex,'first':first}"
     [ngStyle]="{'color': i===selectedIndex?titleActiveColor:titleColor}"
     (click)="handleSelection(i)"

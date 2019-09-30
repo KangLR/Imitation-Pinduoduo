@@ -12,6 +12,7 @@ import { Component, Input,EventEmitter, Output} from '@angular/core';
 // }
 
 export interface TopMenu{
+  id:number;
   title:string;
   link?:string;
 }
