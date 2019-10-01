@@ -27,7 +27,18 @@ export class HomeDetailComponent  {
     this.route.queryParamMap.subscribe(params => {
       console.log('查询参数', params);
     });
+
+    //管道
+    this.date=this.minusDays(new Date(),6);
   }
+
+  //管道
+  date:Date;
+  minusDays(date:Date,days:number){
+    const result= new Date(date);
+      result.setDate(result.getDate()-days);
+      return result;
+    }
 
   
 
@@ -179,4 +190,6 @@ export class HomeDetailComponent  {
       link: 'furnitures'
     }
   ];
+
+  
 }
