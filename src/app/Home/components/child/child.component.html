@@ -1,6 +1,22 @@
-<span [textContent]='title'>
+<!--
+  []绑定的代价就是以脏值检测的方式去检测它的改变，更新值
+  如果要毫秒级的话就要运行一千遍，那么太消耗资源了，不能用绑定去做
+  用引用的方法做
+-->
+<!-- <span [textContent]=" time | date:'HH:mm:ss:SSS'">
+    <!--这种写法和{{title}}是一样的，只不过是拿指令做了，多调用了一次，又出来了两个脏值检测
+</span>
+<p>
+  child works!
+</p> -->
+
+<span #timeRef>
     <!--这种写法和{{title}}是一样的，只不过是拿指令做了，多调用了一次，又出来了两个脏值检测-->
 </span>
 <p>
   child works!
-</p>
+</p> 
+
+
+
+<button (click)="handleClick()">触发脏值检测</button>

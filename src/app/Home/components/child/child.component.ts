@@ -1,4 +1,5 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-child',
@@ -13,12 +14,14 @@ export class ChildComponent implements OnInit {
   //可以在浏览器中划分n个区域，每个区域自己运行自己的程序
   //如果把值运行在angular的zone之外，就检测不到值的改变
 
-  constructor(private ngZone:NgZone) { 
-    this._title='hi';
+  constructor(private ngZone:NgZone,private rd2:Renderer2) { 
+    // this._title='hi';
   }
 
   ngOnInit() {
   }
+
+  @ViewChild('timeRef',{static:true}) timeRef:ElementRef;
 
   ngAfterViewChecked(): void {
     // this.ngZone.runOutsideAngular(()=>{this._title='改变'});
@@ -26,17 +29,30 @@ export class ChildComponent implements OnInit {
 
     //但是要异步才行
     //这样同步检查时title是不变的
-    this.ngZone.runOutsideAngular(()=>{setInterval(()=>{this._title='改变';},1000)});
+    //formatDate()就是日期管道对应的变化函数
+    //把en-US替换成zh-Hans就是中国简体，但要配置一些东西才行
+
+    // this.ngZone.runOutsideAngular(()=>{setInterval(()=>{this._time=Date.now();},1000)});
+    // this.ngZone.runOutsideAngular(()=>{setInterval(()=>{this.timeRef.nativeElement.innerText=Date.now();},1000)});
+    this.ngZone.runOutsideAngular(()=>{setInterval(()=>{this.rd2.setProperty(this.timeRef.nativeElement,'innerText',formatDate(Date.now(),'HH:mm:ss:SSS','en-US'));},1000)});
     
   }
-
-
-  _title;
-  
-  public get title() : string {
-    console.log('脏值检测');
-    return this._title;
+  //做个倒计时
+  _time;  
+  public get time() : number {
+    return this._time;
   }
+  
+  //因为点击事件会触发脏值检测
+  handleClick(){};
+
+
+  // _title;
+  
+  // public get title() : string {
+  //   console.log('脏值检测');
+  //   return this._title;
+  // }
 
   //angular用于脏值检测时做的步骤
 //   function checkAndUpdateView(view) {

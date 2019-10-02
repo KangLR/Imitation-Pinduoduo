@@ -1,4 +1,4 @@
-import { Component, Input,EventEmitter, Output} from '@angular/core';
+import { Component, Input,EventEmitter, Output, ChangeDetectionStrategy} from '@angular/core';
 
 //属性接口
 //ts中接口的作用就是进行类型检查
@@ -25,7 +25,12 @@ export interface TopMenu{
 @Component({
   selector: 'app-scrollable-tab',
   templateUrl: './scrollable-tab.component.html',
-  styleUrls: ['./scrollable-tab.component.css']
+  styleUrls: ['./scrollable-tab.component.css'],
+  //使用onPush策略提高脏值检测性能,接下来它只会检测@Input属性的变化
+  //变化了会引发脏值检测，否则不理
+  //注意ChangeDetectionStrategy来自@angular/core库
+  changeDetection:ChangeDetectionStrategy.OnPush
+  //
 })
 export class ScrollableTabComponent  {
 
