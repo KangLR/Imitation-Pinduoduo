@@ -1,0 +1,14 @@
+@baseUrl=https://jsonplaceholder.typicode.com
+
+GET {{baseUrl}}/posts HTTP/1.1
+# 虚假的在线REST API
+
+###
+POST https://jsonplaceholder.typicode.com/posts HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"这是个测试标题",
+    "body":"这是个测试内容",
+    "userId":1
+}
