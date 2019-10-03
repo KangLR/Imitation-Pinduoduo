@@ -1,9 +1,18 @@
 @baseUrl=https://jsonplaceholder.typicode.com
 
 GET {{baseUrl}}/posts HTTP/1.1
-# 虚假的在线REST API
+# 虚假的在线RESTFUL API
+#对posts这个资源进行查询，s复数的话代表一个集合
+#GET --查询
+#POST --新增
+#PUT --更改
+#DELETE --删除
+
+
 
 ###
+#id=101在服务端生成
+
 POST https://jsonplaceholder.typicode.com/posts HTTP/1.1
 Content-Type: application/json
 
@@ -12,3 +21,29 @@ Content-Type: application/json
     "body":"这是个测试内容",
     "userId":1
 }
+
+###
+#会报错，因为这是假的，101资源并没有真正的在服务器上建立，他不想让你修改东西
+#可以修改id为1的帖子，因为它的id是从1到100的
+PUT {{baseUrl}}/posts/101 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"这是个测试标题",
+    "body":"这是个测试内容",
+    "userId":1
+}
+
+###
+#可以修改id为1的帖子
+PUT {{baseUrl}}/posts/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"这是个测试标题",
+    "body":"这是个测试内容",
+    "userId":1
+}
+
+###
+DELETE {{baseUrl}}/posts/1 HTTP/1.1
