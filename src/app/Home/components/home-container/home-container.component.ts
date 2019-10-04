@@ -11,7 +11,7 @@ import { HomeService, token } from '../services';
 export class HomeContainerComponent implements OnInit {
   //baseUrl=token
   constructor(private router:Router,private service:HomeService,@Inject(token) private baseUrl:string) { 
-    this.topMenus=this.service.getTabs();
+    this.service.getTabs().subscribe(tabs=>{this.topMenus=tabs});
     console.log(baseUrl);
   }
 

@@ -16,8 +16,8 @@ export class HomeDetailComponent  {
   //this.router.navigate(['home',topMenu.link]);
 
   constructor(private route:ActivatedRoute,private service:HomeService) {
-    this.imageSliders=service.getBanners();
-    this.channels=service.getChannels();
+    this.service.getBanners().subscribe(banners=>{this.imageSliders=banners;});
+    this.service.getChannels().subscribe(channels=>{this.channels=channels});
    }
 
   //根据topMenu.link的值使用ngIf判断显示内容

@@ -3,6 +3,9 @@
     overflow: hidden;
 }
 .container .image-slider{
+    position: absolute;
+    top:0;
+    bottom: 0;
     display: flex;
     overflow-x: scroll;
     scroll-behavior: smooth;/*图片平滑过渡*/
