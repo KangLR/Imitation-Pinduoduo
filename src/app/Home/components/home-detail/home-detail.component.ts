@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Channel,  ImageSlider } from 'src/app/shared/components';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../services';
+import { filter, map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-detail',
@@ -16,19 +18,47 @@ export class HomeDetailComponent  {
   //this.router.navigate(['home',topMenu.link]);
 
   constructor(private route:ActivatedRoute,private service:HomeService) {
-    this.service.getBanners().subscribe(banners=>{this.imageSliders=banners;});
-    this.service.getChannels().subscribe(channels=>{this.channels=channels});
+    this.imageSliders$=this.service.getBanners()//.subscribe(banners=>{this.imageSliders=banners;});
+    this.sub2=this.service.getChannels().subscribe(channels=>{this.channels=channels});
    }
 
   //根据topMenu.link的值使用ngIf判断显示内容
-  selectedTabLink;
+  //变成数据流后可以使用async管道转化,自动订阅
+  selectedTabLink$:Observable<String>;
+
+   //轮播图图片
+  //  imageSliders:ImageSlider[]=[];
+  imageSliders$:Observable<ImageSlider[]>;
+
+   channels:Channel[]=[];
+   sub1:Subscription;
+   sub2:Subscription;
+ 
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      console.log('路径参数: ', params);
-      this.selectedTabLink = params.get('tabLink');
-    });
-    this.route.queryParamMap.subscribe(params => {
+
+    this.selectedTabLink$=this.route.paramMap
+    .pipe(
+      //字典型的流变成了string型的流
+      filter(params=>params.has('tabLink')),
+      map(params=>params.get('tabLink'))
+    );
+
+
+    // this.route.paramMap
+    // .pipe(
+    //   filter(params=>params.has('tabLink')),
+    //   map(params=>params.get('tabLink'))
+    // )//这个操作就是为了得到tabLink
+    //   .subscribe(tabLink => {
+    //   console.log('路径参数: ', tabLink);
+    //   this.selectedTabLink = tabLink;
+    // });
+    //可以由以下代替
+
+
+
+    this.sub1=this.route.queryParamMap.subscribe(params => {
       console.log('查询参数', params);
     });
 
@@ -42,14 +72,11 @@ export class HomeDetailComponent  {
     const result= new Date(date);
       result.setDate(result.getDate()-days);
       return result;
+    }  
+
+    //用async pipe就不用取消订阅，清理它防止内存泄漏
+    ngOnDestroy(): void {
+      this.sub1.unsubscribe();
+      this.sub2.unsubscribe()
     }
-
-  
-
-  //轮播图图片
-  imageSliders:ImageSlider[]=[];
-
-  channels:Channel[]=[];
-
-  
 }

@@ -13,10 +13,10 @@ import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     SharedModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     {
