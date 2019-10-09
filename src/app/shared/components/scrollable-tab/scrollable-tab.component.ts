@@ -82,7 +82,9 @@ export class ScrollableTabComponent  {
   //tabSelected已经被当成了这个组件的事件
   @Output() tabSelected=new EventEmitter();
 
-  selectedIndex=-1;
+  // selectedIndex=-1;
+
+  @Input() SelectedTabLink:string;
 
   @Input() backgroundColor='pink';
 
@@ -93,8 +95,9 @@ export class ScrollableTabComponent  {
   @Input() indicatorColor='brown';
 
   handleSelection(i:number){
-    this.selectedIndex=i;
-    this.tabSelected.emit(this.menus[this.selectedIndex]);//携带的数据是当前选中的元素
+    // this.selectedIndex=i;
+    // this.tabSelected.emit(this.menus[this.selectedIndex]);//携带的数据是当前选中的元素
+    this.tabSelected.emit(this.menus[i]);
   }
 
 

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { RecommendComponent } from './recommend.component';
 import { SharedModule } from '../shared/shared.module';
+import { RecommendContainerComponent } from './components';
+import { RecommendRoutingModule } from './recommend-routing';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    RecommendRoutingModule
   ],
-  declarations: [RecommendComponent]
+  declarations: [RecommendContainerComponent]
 })
 export class RecommendModule { }

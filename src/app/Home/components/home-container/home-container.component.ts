@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { TopMenu} from 'src/app/shared/components';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HomeService, token } from '../services';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-container',
@@ -10,12 +12,17 @@ import { HomeService, token } from '../services';
 })
 export class HomeContainerComponent implements OnInit {
   //baseUrl=token
-  constructor(private router:Router,private service:HomeService,@Inject(token) private baseUrl:string) { 
+  constructor(private router:Router,private route:ActivatedRoute, private service:HomeService,@Inject(token) private baseUrl:string) { 
     this.service.getTabs().subscribe(tabs=>{this.topMenus=tabs});
     console.log(baseUrl);
   }
 
   ngOnInit() {
+    //底下一堆子路由
+    this.selectedTabLink$=this.route.firstChild.paramMap.pipe(
+      filter(params=>params.has('tabLink')),
+      map(params=>params.get('tabLink'))
+    )
   }
 
   topMenus:TopMenu[]=[];
@@ -38,6 +45,8 @@ export class HomeContainerComponent implements OnInit {
 
   //   console.log(topMenu);//topMenu的类型是个对象（object）
   // }
+
+  selectedTabLink$:Observable<string>
   
 
 }

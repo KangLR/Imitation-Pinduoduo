@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule, ParamInterceptor, NotificationInterceptor } from './home';
 import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
+import { RecommendModule } from './recommend';
+import { MyModule } from './my';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http'
     SharedModule,
     HomeModule,
     HttpClientModule,
+    RecommendModule,
+    MyModule,
     AppRoutingModule
   ],
   providers: [

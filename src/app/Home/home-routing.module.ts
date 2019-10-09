@@ -15,8 +15,8 @@ const routes: Routes = [
              },
              {
              path:':tabLink',//路由参数
-                 component:HomeDetailComponent
-         }
+             component:HomeDetailComponent
+             }
             
         ]
     },

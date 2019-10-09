@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable, interval } from 'rxjs';
-import { start } from 'repl';
 import { takeWhile, map, tap } from 'rxjs/operators';
 
 @Component({
