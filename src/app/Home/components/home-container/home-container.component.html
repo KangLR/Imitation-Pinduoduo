@@ -14,4 +14,6 @@
   [SelectedTabLink]="selectedTabLink$ |async"
   (tabSelected)="handleTabSelected($event)" 
 ></app-scrollable-tab>
-<router-outlet></router-outlet>
+<div class="main">
+  <router-outlet></router-outlet>
+</div>

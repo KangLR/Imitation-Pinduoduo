@@ -2,6 +2,7 @@ import { Injectable, Injector, InjectionToken } from "@angular/core";
 import { TopMenu, Channel, ImageSlider } from 'src/app/shared/components';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {Ad, Product} from 'src/app/shared/domain';
 
 @Injectable({
     providedIn:'root'
@@ -24,6 +25,14 @@ export class HomeService{
     return this.http.get<Channel[]>(`${environment.baseUrl}/channels`,{params:{icode:`${environment.iCode}`}});
 
   }  
+
+  getAdByTab(tab:any){
+    return this.http.get<Ad[]>(`${environment.baseUrl}/ads`,{params:{categories_like:tab}});
+  }
+
+  getProductsByTab(tab:any){
+    return this.http.get<Product[]>(`${environment.baseUrl}/products`,{params:{categories_like:tab}});
+  }
 
 
     // getTabs(){

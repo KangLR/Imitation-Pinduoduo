@@ -1,4 +1,4 @@
-<div *ngIf="(selectedTabLink$ | async)==='hot';else other">
+<!-- <div *ngIf="(selectedTabLink$ | async)==='hot';else other">
     <app-image-slider [sliders]="imageSliders$ | async"></app-image-slider>
     <app-horizontal-grid>
         <span appGridItem *ngFor="let item of channels">
@@ -14,4 +14,31 @@
 <div>
     {{date | appAgo}}
 </div>
-<app-parent></app-parent>
+<app-parent></app-parent> 
+
+ng-container 不增加DOM结点
+把流作为常量
+-->
+
+
+<ng-container *ngIf="(selectedTabLink$ | async) as tab">
+    <ng-container *ngIf="tab ==='hot'">
+           <app-image-slider [sliders]="imageSliders$ | async"></app-image-slider>
+           <app-horizontal-grid>
+               <span appGridItem *ngFor="let item of channels">
+                   <img [src]="item.icon" alt="" [appGridItemImage]=" '3rem'" [fitMode]=" 'cover' ">
+                   <span appGridItemTitle='0.7rem'>{{item.title}}</span>
+               </span>
+           </app-horizontal-grid>
+       </ng-container>
+</ng-container>
+<div class="ad-container" *ngIf="ad$ |async as ad">
+    <img [src]="ad.imageUrl" alt="" class="ad-image">
+</div>
+
+<app-vertical-grid>
+    <div *ngFor="let product of products$|async">
+        {{product.title}}
+    </div>
+</app-vertical-grid>
+

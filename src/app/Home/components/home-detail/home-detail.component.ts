@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Channel,  ImageSlider } from 'src/app/shared/components';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../services';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
+import { Ad, Product } from 'src/app/shared/domain';
 
 @Component({
   selector: 'app-home-detail',
@@ -21,6 +22,10 @@ export class HomeDetailComponent  {
     this.imageSliders$=this.service.getBanners()//.subscribe(banners=>{this.imageSliders=banners;});
     this.sub2=this.service.getChannels().subscribe(channels=>{this.channels=channels});
    }
+
+  ad$:Observable<Ad[]>
+  products$:Observable<Product[]>
+
 
   //根据topMenu.link的值使用ngIf判断显示内容
   //变成数据流后可以使用async管道转化,自动订阅
@@ -43,7 +48,14 @@ export class HomeDetailComponent  {
       filter(params=>params.has('tabLink')),
       map(params=>params.get('tabLink'))
     );
-
+    this.ad$=this.selectedTabLink$.pipe(
+      switchMap(tab=>this.service.getAdByTab(tab)),
+      filter(ads=>ads.length>0),
+      map(ads=>ads[0])
+    );
+    this.products$=this.selectedTabLink$.pipe(
+      switchMap(tab=>this.service.getProductsByTab(tab))
+    );
 
     // this.route.paramMap
     // .pipe(

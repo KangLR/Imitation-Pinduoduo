@@ -4,3 +4,11 @@
     align-items: stretch;
     flex:1;/* 这个最重要 */
 }
+.main{
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100%-3rem);
+}
